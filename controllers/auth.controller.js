@@ -23,8 +23,7 @@ export const login = (req, res) => {
         const checkPassword = bcrypt.compareSync(req.body.password, data[0].password);
         if(!checkPassword) return res.status(400).json("wrong password!");
         
-        
-        const token = jwt.sign({ id: data[0].id}, authConfig.secretKey);
+        const token = jwt.sign({ id: data[0].id}, authConfig.secretKey, {expiresIn: `24h`});
         const {password, ...others} = data[0];
         res.cookie("accessToken", token, {
             httpOnly : true,

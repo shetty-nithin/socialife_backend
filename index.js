@@ -7,6 +7,7 @@ import postRoutes from "./routes/post.routes.js";
 import commentRoutes from "./routes/comment.routes.js"
 import likeRoutes from "./routes/like.routes.js"
 import relationships from "./routes/relationship.routes.js";
+import uploads from "./routes/upload.routes.js";
 
 import multer from "multer";
 import cors from "cors";
@@ -37,10 +38,7 @@ app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
 app.use("/api/likes", likeRoutes);
 app.use("/api/relationships", relationships);
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  const file = req.file;
-  res.status(200).json(file.filename)
-})
+app.use("/api/upload", upload.single("file"), uploads);
 
 app.listen(8080, () => {
     console.log("server is listening at the port 8080");
