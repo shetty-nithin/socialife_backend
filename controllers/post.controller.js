@@ -4,8 +4,8 @@ import moment from "moment";
 export const getPosts = (req, res) => {
     const uId = req.query.userId;
     const q = uId !== 'undefined'
-                ?   `SELECT p.*, u.id AS userId, name, profilePhoto FROM posts AS p JOIN users AS u ON (u.id = p.userId) WHERE p.userId = ? ORDER BY p.createdAt DESC`
-                :   `SELECT p.*, u.id AS userId, name, profilePhoto FROM posts AS p JOIN users AS u ON (u.id = p.userId) LEFT JOIN relationships AS r ON (p.userId = r.followedUserId) WHERE r.followerUserId = ? OR p.userId = ? ORDER BY p.createdAt DESC`;
+                ?   `SELECT p.*, u.id AS userId, u.name, u.profilePhoto FROM posts AS p JOIN users AS u ON (u.id = p.userId) WHERE p.userId = ? ORDER BY p.createdAt DESC`
+                :   `SELECT p.*, u.id AS userId, u.name, u.profilePhoto FROM posts AS p JOIN users AS u ON (u.id = p.userId) LEFT JOIN relationships AS r ON (p.userId = r.followedUserId) WHERE r.followerUserId = ? OR p.userId = ? ORDER BY p.createdAt DESC`;
     
     const values = uId !== "undefined" ? [uId] : [req.decodedUserId, req.decodedUserId];
     db.query(q, values, (err, data) => {
