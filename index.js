@@ -21,18 +21,24 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(cors({
-  origin: indexConfig.CLIENT_URL,
-  credentials: true  
+    origin: indexConfig.CLIENT_URL,
+    credentials: true  
 }));
+app.options("*", cors({
+    origin: indexConfig.CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+}))
 app.use(cookieParser());
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../client/public/upload")
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname); 
-  }
+    destination: function (req, file, cb) {
+        cb(null, "../client/public/upload")
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + file.originalname); 
+    }
 })
 const upload = multer({ storage: storage });
 
