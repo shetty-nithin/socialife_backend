@@ -26,7 +26,10 @@ export const login = (req, res) => {
         const token = jwt.sign({ id: data[0].id}, authConfig.secretKey, {expiresIn: `24h`});
         const {password, ...others} = data[0];
         res.cookie("accessToken", token, {
-            httpOnly : true,
+            expiresIn: new Date(Date.now() + (3600*1000*24*180*1)),
+            secure: true,
+            httpOnly: true,
+            sameSite: 'none'
         }).status(200).json(others);
     })
 }

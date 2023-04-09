@@ -20,7 +20,7 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json());
-app.use(cors({origin : indexConfig.CLIENT_URL}));
+app.use(cors({origin: indexConfig.CLIENT_URL}));
 app.use(cookieParser());
 
 const storage = multer.diskStorage({
@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + file.originalname); 
   }
 })
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -41,6 +41,6 @@ app.use("/api/likes", likeRoutes);
 app.use("/api/relationships", relationships);
 app.use("/api/upload", upload.single("file"), uploads);
 
-app.listen(indexConfig.PORT, () => {
+app.listen(indexConfig.PORT, () => {  
     console.log(`server is listening at the port ${indexConfig.PORT}`);
 });
