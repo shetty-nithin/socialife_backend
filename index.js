@@ -20,7 +20,10 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json());
-app.use(cors({origin: indexConfig.CLIENT_URL}));
+app.use(cors({
+  origin: indexConfig.CLIENT_URL,
+  credentials: true  
+}));
 app.use(cookieParser());
 
 const storage = multer.diskStorage({
