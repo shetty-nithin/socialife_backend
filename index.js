@@ -16,16 +16,16 @@ import cookieParser from "cookie-parser";
 
 // middlewares
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    res.setHeader("Access-Control-Allow-Method", true);
-    res.setHeader("Access-Control-Allow-Origin", indexConfig.CLIENT_URL)
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header("Access-Control-Allow-Method", true);
+    res.header("Access-Control-Allow-Origin", true)
     next();
 });
 app.use(express.json());
-// app.use(cors({
-//     origin: indexConfig.CLIENT_URL,
-//     credentials: true  
-// }));
+app.use(cors({
+    origin: indexConfig.CLIENT_URL,
+    credentials: true  
+}));
 app.use(cookieParser());
 
 const storage = multer.diskStorage({
