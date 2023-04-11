@@ -16,7 +16,9 @@ import cookieParser from "cookie-parser";
 
 // middlewares
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Credentials", true);
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    res.setHeader("Access-Control-Allow-Method", true);
+    res.setHeader("Access-Control-Allow-Origin", indexConfig.CLIENT_URL)
     next();
 });
 app.use(express.json());
@@ -24,12 +26,6 @@ app.use(cors({
     origin: indexConfig.CLIENT_URL,
     credentials: true  
 }));
-app.options("*", cors({
-    origin: indexConfig.CLIENT_URL,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
-}))
 app.use(cookieParser());
 
 const storage = multer.diskStorage({
