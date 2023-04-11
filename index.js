@@ -16,9 +16,10 @@ import cookieParser from "cookie-parser";
 
 // middlewares
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header("Access-Control-Allow-Method", true);
-    res.header("Access-Control-Allow-Origin", true)
+    res.setHeader("Access-Control-Allow-Origin", indexConfig.CLIENT_URL)
+    res.setHeader("Access-Control-Allow-Method", "GET, POST, PUT, DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.setHeader("Access-Control-Allow-Credentials", "true")
     next();
 });
 app.use(express.json());
