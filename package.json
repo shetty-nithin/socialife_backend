@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "build": "npm rund build"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
