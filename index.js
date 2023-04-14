@@ -38,6 +38,7 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({ storage: storage });
+console.log("client url is : ", indexConfig.CLIENT_URL);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
