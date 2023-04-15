@@ -14,14 +14,6 @@ import cookieParser from "cookie-parser";
 const app = express();
 
 // middlewares
-// app.use((req, res, next) => {
-//     // res.setHeader("Access-Control-Allow-Origin", indexConfig.CLIENT_URL)
-//     res.setHeader("Access-Control-Allow-Origin", 'https://socialife.netlify.app')
-//     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//     res.setHeader("Access-Control-Allow-Credentials", "true")
-//     next();
-// });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -31,9 +23,21 @@ app.use(cors({
     credentials: true  
 }));
 app.options('*', cors({
-  origin: 'https://socialife.netlify.app',
-  credentials: true
+    origin: 'https://socialife.netlify.app',
+    credentials: true
 }));
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://socialife.netlify.app');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    //intercepts OPTIONS method
+    if ('OPTIONS' === req.method) {
+        res.sendStatus(200);
+    } else {
+        next();
+    }
+});
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
