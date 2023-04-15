@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(cors({
-    origin: indexConfig.CLIENT_URL,
+    origin: "https://socialife.netlify.app",
     credentials: true  
 }));
 app.use(cookieParser());
