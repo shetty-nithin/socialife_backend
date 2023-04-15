@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(cors({
     origin: "https://socialife.netlify.app",
+    // origin: indexConfig.CLIENT_URL,
     credentials: true  
 }));
 app.use(cookieParser());
@@ -40,13 +41,13 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/posts", postRoutes);
-app.use("/api/comments", commentRoutes);
-app.use("/api/likes", likeRoutes);
-app.use("/api/relationships", relationships);
-app.use("/api/upload", upload.single("file"), uploads);
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
+app.use("/comments", commentRoutes);
+app.use("/likes", likeRoutes);
+app.use("/relationships", relationships);
+app.use("/upload", upload.single("file"), uploads);
 
 app.listen(indexConfig.PORT, () => {  
     console.log(`server is listening at the port ${indexConfig.PORT}`);
