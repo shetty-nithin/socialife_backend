@@ -20,7 +20,8 @@ app.use(cookieParser());
 
 app.use(cors({
     origin: 'https://socialife.netlify.app',
-    credentials: true  
+    credentials: true,
+    preflightContinue: true  
 }));
 app.options('*', cors({
     origin: 'https://socialife.netlify.app',
