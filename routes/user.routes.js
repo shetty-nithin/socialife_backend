@@ -5,7 +5,7 @@ import { authJWT } from "../middlewares/index.js"
 const router = express.Router();
 
 router.get("/find/:userId", userController.findUser);
-router.get("/", userController.getUsers);
+router.get("/", [authJWT.verifyToken], userController.getUsers);
 router.put("/", [authJWT.verifyToken], userController.updateUser);
 
 export default router;
