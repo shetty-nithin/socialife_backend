@@ -15,30 +15,29 @@ const app = express();
 
 // middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(cors({
-    origin: 'https://socialife.netlify.app',
+    origin: ['https://socialife.netlify.app'],
     credentials: true,
-    preflightContinue: true  
+    // preflightContinue: true 
 }));
-app.options('*', cors({
-    origin: 'https://socialife.netlify.app',
-    credentials: true
-}));
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://socialife.netlify.app');
-    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+// app.options('*', cors({
+//     origin: 'https://socialife.netlify.app',
+//     credentials: true
+// }));
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', 'https://socialife.netlify.app');
+//     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
-    //intercepts OPTIONS method
-    if ('OPTIONS' === req.method) {
-        res.sendStatus(200);
-    } else {
-        next();
-    }
-});
+//     //intercepts OPTIONS method
+//     if ('OPTIONS' === req.method) {
+//         res.sendStatus(200);
+//     } else {
+//         next();
+//     }
+// });
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
