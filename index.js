@@ -18,10 +18,20 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-    origin: ['https://socialife.netlify.app'],
-    credentials: true,
-    // preflightContinue: true 
+    origin: '*',
+    credentials: true
 }));
+app.use((req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+});
+
+// app.use(cors({
+//     origin: ['https://socialife.netlify.app'],
+//     credentials: true,
+//     preflightContinue: true 
+// }));
 // app.options('*', cors({
 //     origin: 'https://socialife.netlify.app',
 //     credentials: true
@@ -49,6 +59,9 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage });
 
+app.get('/test', (req, res) => {
+    res.send('test test');
+});
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
