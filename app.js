@@ -7,7 +7,6 @@ import likeRoutes from "./routes/like.routes.js"
 import relationships from "./routes/relationship.routes.js";
 import uploads from "./routes/upload.routes.js";
 import indexConfig from "./configs/index.config.js";
-import multer from "multer";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -39,18 +38,9 @@ app.use((req, res, next) => {
     }
 });
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "../client/public/upload")
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + file.originalname); 
-    }
-})
-const upload = multer({ storage: storage });
 
 app.get('/test', (req, res) => {
-    res.send('test test test');
+    res.send('test test test');// this route is just for the testing purpose.
 });
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
@@ -58,7 +48,6 @@ app.use("/posts", postRoutes);
 app.use("/comments", commentRoutes);
 app.use("/likes", likeRoutes);
 app.use("/relationships", relationships);
-app.use("/upload", upload.single("file"), uploads);
 
 app.listen(indexConfig.PORT, () => {  
     console.log(`server is listening at the port ${indexConfig.PORT}`);
