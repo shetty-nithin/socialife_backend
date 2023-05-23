@@ -5,7 +5,6 @@ import postRoutes from "./routes/post.routes.js";
 import commentRoutes from "./routes/comment.routes.js"
 import likeRoutes from "./routes/like.routes.js"
 import relationships from "./routes/relationship.routes.js";
-import uploads from "./routes/upload.routes.js";
 import indexConfig from "./configs/index.config.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
