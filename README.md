@@ -69,7 +69,7 @@ This is an API for the social media website "socialife".
 ## Demo
 
 #### User Interface <br/><br/>
-
+https://github.com/shetty-nithin/socialife_backend/assets/62413993/03ea6c34-fa05-465c-89f4-e629d7daf0e1
 
 
 <!-- MARKDOWN LINKS -->
